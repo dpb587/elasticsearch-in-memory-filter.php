@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "psr-4": {
+      "DPB\\ElasticsearchInMemoryFilter\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DPB\\ElasticsearchInMemoryFilter\\Test\\": "test"
+    }
+  },
+  "name": "dpb587/elasticsearch-in-memory-filter"
+}
