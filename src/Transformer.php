@@ -2,29 +2,30 @@
 
 namespace DPB\ElasticsearchInMemoryFilter;
 
-class Transformer {
-  const CLASSMAP = [
+class Transformer
+{
+    const CLASSMAP = [
     'and' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\AndFilter',
     'nested' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\NestedFilter',
     'term' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\TermFilter',
   ];
 
-  private function __construct()
-  {
-  }
-
-  static public function transform(array $filter)
-  {
-    if (count($filter) != 1) {
-      throw new \InvalidArgumentException('Expected one and only one element in filter');
+    private function __construct()
+    {
     }
 
-    $filterType = key($filter);
+    public static function transform(array $filter)
+    {
+        if (count($filter) != 1) {
+            throw new \InvalidArgumentException('Expected one and only one element in filter');
+        }
 
-    if (!array_key_exists($filterType, static::CLASSMAP)) {
-      throw new \InvalidArgumentException(sprintf('Unknown filter type: %s', $filterType));
+        $filterType = key($filter);
+
+        if (!array_key_exists($filterType, static::CLASSMAP)) {
+            throw new \InvalidArgumentException(sprintf('Unknown filter type: %s', $filterType));
+        }
+
+        return call_user_func([static::CLASSMAP[$filterType], 'transform'], current($filter));
     }
-
-    return call_user_func([static::CLASSMAP[$filterType], 'transform'], current($filter));
-  }
 }

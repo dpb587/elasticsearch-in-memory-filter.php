@@ -4,5 +4,5 @@ namespace DPB\ElasticsearchInMemoryFilter;
 
 interface FilterInterface
 {
-  public function match(array $value);
+    public function match(array $value);
 }
