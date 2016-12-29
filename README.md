@@ -11,32 +11,18 @@ $doc = [
   'name' => 'Dublin Pizza Company',
   'type' => 'restaurant',
   'categories' => [
-    [
-      'id' => 12345,
-      'name' => 'pizza',
-    ],
-  ],
-];
+    [ 'id' => 12345,
+      'name' => 'pizza' ] ] ];
 
 $esFilter = [
   'and' => [
-    [
-      'term' => [
-        'type' => 'restaurant',
-      ],
-    ],
-    [
-      'nested' => [
+    [ 'term' => [
+        'type' => 'restaurant' ] ],
+    [ 'nested' => [
         'path' => 'categories',
         'filter' => [
           'term' => [
-            'name' => 'pizza',
-          ],
-        ],
-      ],
-    ],
-  ],
-];
+            'categories.name' => 'pizza' ] ] ] ] ] ];
 
 $filter = _\Transformer::transform($esFilter);
 

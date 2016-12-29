@@ -21,7 +21,7 @@ class Transformer {
 
     $filterType = key($filter);
 
-    if (!isset(static::CLASSMAP[$filterType])) {
+    if (!array_key_exists($filterType, static::CLASSMAP)) {
       throw new \InvalidArgumentException(sprintf('Unknown filter type: %s', $filterType));
     }
 

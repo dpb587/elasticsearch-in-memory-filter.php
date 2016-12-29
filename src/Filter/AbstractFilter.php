@@ -31,13 +31,24 @@ abstract class AbstractFilter implements FilterInterface
     $pathParts = explode('.', $path, 2);
 
     if (!isset($value[$pathParts[0]])) {
-      throw new PathMissingException($contextPath . '.' . $pathParts[0]);
+      // check if this is an array value; lazy preg
+        if (preg_match('/^\d+$/', implode('', array_keys($value)))) {
+            $results = [];
+
+            foreach ($value as $valueElement) {
+                $results[] = $this->traversePath($valueElement, $path, $contextPath);
+            }
+
+            return $results;
+        }
+
+      throw new PathMissingException($contextPath . $pathParts[0]);
     }
 
     if (!isset($pathParts[1])) {
       return $value[$pathParts[0]];
     }
 
-    return $this->traversePath($value[$pathParts[0]], $pathParts[1]);
+    return $this->traversePath($value[$pathParts[0]], $pathParts[1], $contextPath . $pathParts[0] . '.');
   }
 }

@@ -9,7 +9,7 @@ class AndFilter extends AbstractFilter
 {
   static public function transform(array $config)
   {
-    return new static(
+    return parent::transform(
       array_map(
         function ($config) {
           return Transformer::transform($config);

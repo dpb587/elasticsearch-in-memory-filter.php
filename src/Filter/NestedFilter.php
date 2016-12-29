@@ -4,10 +4,20 @@ namespace DPB\ElasticsearchInMemoryFilter\Filter;
 
 use DPB\ElasticsearchInMemoryFilter\Exception\PathMissingException;
 use DPB\ElasticsearchInMemoryFilter\FilterInterface;
+use DPB\ElasticsearchInMemoryFilter\Transformer;
 
 class NestedFilter extends AbstractFilter
 {
-  public function match(array $value)
+    static public function transform(array $config)
+    {
+        if (isset($config['filter'])) {
+            $config['filter'] = Transformer::transform($config['filter']);
+        }
+        
+        return parent::transform($config);
+    }
+
+    public function match(array $value)
   {
     try {
       $nestedValues = $this->traversePath($value, $this->config['path']);
