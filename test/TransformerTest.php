@@ -20,6 +20,9 @@ class TransformerTest extends \PHPUnit_Framework_TestCase
             'field2' => 'value2',
           ],
         ],
+        [
+          'match_all' => [],
+        ],
       ]
     ]);
 

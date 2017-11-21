@@ -6,6 +6,7 @@ class Transformer
 {
     const CLASSMAP = [
     'and' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\AndFilter',
+    'match_all' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\MatchAllFilter',
     'nested' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\NestedFilter',
     'or' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\OrFilter',
     'term' => 'DPB\\ElasticsearchInMemoryFilter\\Filter\\TermFilter',
