@@ -32,15 +32,15 @@ abstract class AbstractFilter implements FilterInterface
 
         if (!isset($value[$pathParts[0]])) {
             // check if this is an array value; lazy preg
-        if (preg_match('/^\d+$/', implode('', array_keys($value)))) {
-            $results = [];
+            if (preg_match('/^\d+$/', implode('', array_keys($value)))) {
+                $results = [];
 
-            foreach ($value as $valueElement) {
-                $results[] = $this->traversePath($valueElement, $path, $contextPath);
+                foreach ($value as $valueElement) {
+                    $results[] = $this->traversePath($valueElement, $path, $contextPath);
+                }
+
+                return $results;
             }
-
-            return $results;
-        }
 
             throw new PathMissingException($contextPath . $pathParts[0]);
         }
